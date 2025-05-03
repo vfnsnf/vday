@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>KITTYS DAY</title>
+</head>
+<body>
+    <div class="music-player">
+        <button id="prev-song"><i class="fas fa-step-backward"></i></button>
+        <button id="music-toggle"><i class="fas fa-music"></i></button>
+        <button id="next-song"><i class="fas fa-step-forward"></i></button>
+        <div class="music-info">
+            <span id="song-title">Your Song Title</span>
+        </div>
+        <audio id="background-music" loop>
+            <source id="audio-source" src="music/ST.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+    
+
+    <header>
+        <h1>To my wonderful girl</h1>
+        <p>Wishing You A Lovely Life</p>
+    </header>
+
+    <div class="carousel-container">
+        <div class="carousel">
+            <div class="item"><img src="photos/img1.jpeg" alt="Memory 1"></div>
+            <div class="item"><img src="photos/img2.jpeg" alt="Memory 2"></div>
+            <div class="item"><img src="photos/img3.jpeg" alt="Memory 3"></div>
+            <div class="item"><img src="photos/img4.jpeg" alt="Memory 4"></div>
+            <div class="item"><img src="photos/img5.jpeg" alt="Memory 5"></div>
+            <div class="item"><img src="photos/img6.jpeg" alt="Memory 6"></div>
+            <div class="item"><img src="photos/img7.jpeg" alt="Memory 7"></div>
+        </div>
+        <div class="carousel-controls">
+            <button id="prev-btn"><i class="fas fa-chevron-left"></i></button>
+            <button id="next-btn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <div class="imageBox" style="--img:url('photos/img10.jpeg')"></div>
+            <div class="content">
+                <h3>First Meet</h3>
+                <p>The day we first met... CLICK</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="imageBox" style="--img:url('photos/img17.jpeg')"></div>
+            <div class="content">
+                <h3>Our Adventure</h3>
+                <p>Meeting you for the first time as my girlfriend was a moment I will never forget.... CLICK</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="imageBox" style="--img:url('photos/img12.jpeg')"></div>
+            <div class="content">
+                <h3>Forever Yours</h3>
+                <p>
+                Through all of life's ups and downs, your love has been my constant.
+                I can't wait to create more beautiful memories together... Click</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="love-notes">
+        <h2>My Love Notes</h2>
+        <div class="note">
+            <p>"In your eyes, I found love. In your heart, I found my peace."</p>
+        </div>
+        <div class="note">
+            <p>"Told you were special and you became my first love."</p>
+        </div>
+        <div class="note">
+            <p>"You're the missing piece I never knew I needed."</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Created with Love ❤️ | - Your Bebu </p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <title>Our Little Day Out</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        :root {
+            /* Dark Theme Colors */
+            --dark-bg-gradient: linear-gradient(135deg, #121212, #1a1a1a, #121212);
+            --dark-container-bg: rgba(30, 30, 30, 0.9);
+            --dark-text: #f1f3f5;
+            --dark-secondary-text: #e0e0e0;
+            --dark-accent: #d81b60;
+            --dark-accent-hover: #e91e63;
+            --dark-shadow: rgba(0, 0, 0, 0.2);
+            --dark-accent-shadow: rgba(216, 27, 96, 0.3);
+
+            /* Light Theme Colors */
+            --light-bg-gradient: linear-gradient(135deg, #ffccd5, #ffb6b9, #ffe3e3);
+            --light-container-bg: rgba(255, 255, 255, 0.8);
+            --light-text: #660000;
+            --light-secondary-text: #cc3366;
+            --light-accent: #ff4d6d;
+            --light-accent-hover: #ff6f85;
+            --light-shadow: rgba(255, 77, 109, 0.2);
+            --light-accent-shadow: rgba(255, 77, 109, 0.3);
+
+            /* Default to dark theme */
+            --bg-gradient: var(--dark-bg-gradient);
+            --container-bg: var(--dark-container-bg);
+            --text: var(--dark-text);
+            --secondary-text: var(--dark-secondary-text);
+            --accent: var(--dark-accent);
+            --accent-hover: var(--dark-accent-hover);
+            --shadow: var(--dark-shadow);
+            --accent-shadow: var(--dark-accent-shadow);
+        }
+
+        body.light-theme {
+            --bg-gradient: var(--light-bg-gradient);
+            --container-bg: var(--light-container-bg);
+            --text: var(--light-text);
+            --secondary-text: var(--light-secondary-text);
+            --accent: var(--light-accent);
+            --accent-hover: var(--light-accent-hover);
+            --shadow: var(--light-shadow);
+            --accent-shadow: var(--light-accent-shadow);
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--container-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--accent-shadow);
+        }
+
+        h1 {
+            color: var(--accent);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .image-container {
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            border: 1px solid var(--accent-shadow);
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px var(--accent-shadow);
+        }
+
+        p {
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-text);
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-3px);
+        }
+
+        .quote {
+            font-style: italic;
+            text-align: center;
+            font-size: 1.2rem;
+            margin: 2rem 0;
+            color: var(--accent);
+            padding: 1rem;
+            background: rgba(216, 27, 96, 0.05);
+            border-radius: 10px;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            background: var(--accent-hover);
+        }
+
+        .heart-button {
+            background-color: var(--card-bg);
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            padding: 12px 28px;
+            text-align: center;
+            display: inline-block;
+            font-size: 1rem;
+            border-radius: 3rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            margin: 20px auto;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .heart-button:hover {
+            background-color: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            box-shadow: 0 8px 20px var(--accent-shadow);
+        }
+
+        .heart-button i {
+            transition: transform 0.4s ease;
+            margin-right: 8px;
+        }
+
+        .heart-button:hover i {
+            transform: scale(1.2);
+            animation: heartbeat 1s infinite;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>Our Day</h1>
+
+        <div class="image-container">
+            <img src="photos/img4.jpeg" alt="Our Adventure">
+        </div>
+
+        <p>From the moment I saw you, everything else faded. I was nervous, unsure, but when you smiled at me, it felt like the world stopped for a second. That striped black and white dress—it’s etched in my memory forever.</p>
+
+    <p>That day gave me everything I’d never felt before. My first kiss, my first real hug that meant everything, my first time holding someone who felt like home. You made the ordinary feel magical.</p>
+
+    <p>We didn’t need a plan—we just went with the flow, you being nervous about the calls then ending up in SoBo for dinner, walking along Marine Drive hand in hand, it was spontaneous and perfect. The city lights, the breeze, you - it was all a dream I didn’t want to wake up from.</p>
+
+    <p>And then, when you rested your head on my shoulder, I couldn’t stop smiling. I kept looking at you, unable to believe you were really there, really mine. You felt like peace, like everything I'd been waiting for.</p>
+
+    <p>You started playing with my hand, tracing lines on my fingers like you were reading a story only you could see. You tugged gently at my ear and laughed when I flinched, and I loved every second of it. I love how you play with me, how your smallest touches stay with me long after you’re gone.</p>
+
+    <p>That day will always be ours. A day of firsts, of warmth, of soft laughter and quiet love. With you, even silence feels full, and even the simplest moments become unforgettable.</p>
+
+    <div class="quote">"Baby I want You (hehe)"</div>
+
+    <div class="gallery">
+        <img src="photos/img14.jpeg" alt="Adventure moment 1">
+        <img src="photos/img12.jpeg" alt="Adventure moment 2">
+        <img src="photos/img18.jpeg" alt="Adventure moment 3">
+    </div>
+
+    <button class="heart-button" onclick="window.close()">Back to Our Story</button>
+    </div>
+</body>
+<script>
+    // Theme toggle functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        // Create the theme toggle button
+        const themeToggle = document.createElement('button');
+        themeToggle.className = 'theme-toggle';
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>'; // Assuming you're using Font Awesome
+        document.body.appendChild(themeToggle);
+        
+        // Check for saved theme preference or default to dark
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-theme');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+        
+        // Toggle theme when button is clicked
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('light-theme');
+            
+            // Save theme preference
+            const currentTheme = document.body.classList.contains('light-theme') ? 'light' : 'dark';
+            localStorage.setItem('theme', currentTheme);
+            
+            // Update button icon
+            if (currentTheme === 'light') {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        });
+    });
+</script>
+
+</html>

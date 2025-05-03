@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <title>Forever Yours</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        :root {
+            /* Dark Theme Colors */
+            --dark-bg-gradient: linear-gradient(135deg, #121212, #1a1a1a, #121212);
+            --dark-container-bg: rgba(30, 30, 30, 0.9);
+            --dark-text: #f1f3f5;
+            --dark-secondary-text: #e0e0e0;
+            --dark-accent: #d81b60;
+            --dark-accent-hover: #e91e63;
+            --dark-card-bg: #252525;
+            --dark-shadow: rgba(0, 0, 0, 0.2);
+            --dark-accent-shadow: rgba(216, 27, 96, 0.3);
+
+            /* Light Theme Colors */
+            --light-bg-gradient: linear-gradient(135deg, #ffccd5, #ffb6b9, #ffe3e3);
+            --light-container-bg: rgba(255, 255, 255, 0.8);
+            --light-text: #660000;
+            --light-secondary-text: #cc3366;
+            --light-accent: #ff4d6d;
+            --light-accent-hover: #ff6f85;
+            --light-card-bg: white;
+            --light-shadow: rgba(255, 77, 109, 0.2);
+            --light-accent-shadow: rgba(255, 77, 109, 0.3);
+
+            /* Default to dark theme */
+            --bg-gradient: var(--dark-bg-gradient);
+            --container-bg: var(--dark-container-bg);
+            --text: var(--dark-text);
+            --secondary-text: var(--dark-secondary-text);
+            --accent: var(--dark-accent);
+            --accent-hover: var(--dark-accent-hover);
+            --card-bg: var(--dark-card-bg);
+            --shadow: var(--dark-shadow);
+            --accent-shadow: var(--dark-accent-shadow);
+        }
+
+        body.light-theme {
+            --bg-gradient: var(--light-bg-gradient);
+            --container-bg: var(--light-container-bg);
+            --text: var(--light-text);
+            --secondary-text: var(--light-secondary-text);
+            --accent: var(--light-accent);
+            --accent-hover: var(--light-accent-hover);
+            --card-bg: var(--light-card-bg);
+            --shadow: var(--light-shadow);
+            --accent-shadow: var(--light-accent-shadow);
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--container-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--accent-shadow);
+        }
+
+        h1 {
+            color: var(--accent);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .image-container {
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        p {
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-text);
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-3px);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 700px;
+            margin: 3rem auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--accent);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+
+        .moment {
+            position: relative;
+            width: 45%;
+            margin-bottom: 2rem;
+        }
+
+        .moment:nth-child(odd) {
+            left: 0;
+        }
+
+        .moment:nth-child(even) {
+            left: 55%;
+        }
+
+        .moment-content {
+            padding: 1rem;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .moment-content h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .moment::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--card-bg);
+            border: 4px solid var(--accent);
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+
+        .moment:nth-child(odd)::after {
+            right: -12px;
+        }
+
+        .moment:nth-child(even)::after {
+            left: -12px;
+        }
+
+        .letter {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            font-style: italic;
+            margin: 3rem 0;
+            position: relative;
+            box-shadow: 0 5px 15px var(--shadow);
+            border-top: 2px solid var(--accent);
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .letter::before {
+            content: '"';
+            font-size: 5rem;
+            color: var(--accent);
+            position: absolute;
+            top: -20px;
+            left: 10px;
+            opacity: 0.3;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            background: var(--accent-hover);
+        }
+
+        .heart-button {
+            background-color: var(--card-bg);
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            padding: 12px 28px;
+            text-align: center;
+            display: inline-block;
+            font-size: 1rem;
+            border-radius: 3rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            margin: 20px auto;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .heart-button:hover {
+            background-color: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            box-shadow: 0 8px 20px var(--accent-shadow);
+        }
+
+        .heart-button i {
+            transition: transform 0.4s ease;
+            margin-right: 8px;
+        }
+
+        .heart-button:hover i {
+            transform: scale(1.2);
+            animation: heartbeat 1s infinite;
+        }
+
+        .signature {
+            margin-top: 30px;
+            font-style: italic;
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Forever Yours</h1>
+
+        <div class="image-container">
+            <img src="photos/img14.jpeg" alt="Forever Yours">
+        </div>
+
+        <p>They say love doesn’t always start with fireworks—sometimes, it begins quietly. We met back in high school,
+            just two people figuring life out, not knowing what we’d become to each other. What started as nothing
+            slowly grew into everything. We’ve come so far from those early days, and even now, with the distance
+            between us, we’re still holding on. It’s not always easy, but the fact that we’re still here means something
+            real. Something worth fighting for.</p>
+
+
+        <p>Our journey isn’t always easy. We go through ups and downs, face challenges that test our strength, and grow
+            through moments that continue to shape us. But through it all, one thing stays constant: my love for you
+            grows deeper with every passing day.</p>
+
+        <div class="timeline">
+            <div class="moment">
+                <div class="moment-content">
+                    <h3>The Beginning 2019</h3>
+                    <p>When we first met, neither of us knew how important we would become to each other.
+                        When I first saw you in school , in rofel , I felt you were different but I never
+                        thought you will be this Special.
+                    </p>
+                </div>
+            </div>
+
+            <div class="moment">
+                <div class="moment-content">
+                    <h3>Growing Love 2020-2023</h3>
+                    <p>Our love grows in the quiet, everyday moments through late night calls, good morning texts, and
+                        the way we talk like it's part of our routine. It is in those daily conversations, the ones that
+                        feel ordinary but mean everything, that I have come to love you more deeply. Being part of each
+                        other’s lives, even from a distance, has made us stronger and more connected than ever.</p>
+                </div>
+            </div>
+
+            <div class="moment">
+                <div class="moment-content">
+                    <h3>Reconnecting - 2024</h3>
+                    <p>When you moved to Canada, I never thought I’d see you again. But last summer, when we met up, it
+                        all just clicked again. I realized how much I used to get dressed up just for you, always hoping
+                        you'd notice. And looking back, it was all worth it. Seeing you again reminded me of how special
+                        everything was, and how those feelings never really went away.</p>
+                </div>
+            </div>
+
+            <div class="moment">
+                <div class="moment-content">
+                    <h3>Committing - 2025</h3>
+                    <p>This winter, I was with you, and this time, you were my girlfriend. We’re crazy together, wanting
+                        each other all the time. I love being with you and only you. Honestly, I don’t like when there
+                        are people around us , it just feels better when it’s just the two of us. Everything seems more
+                        special that way.</p>
+                </div>
+            </div>
+
+            <div class="moment">
+                <div class="moment-content">
+                    <h3>Always</h3>
+                    <p>Even though we disagree sometimes and give each other a little attitude, I’m still choosing you,
+                        every day. It’s crazy how we keep growing together, with even more love than when we started. No
+                        matter what, you’re the one I want, and that hasn’t changed.</p>
+                </div>
+            </div>
+        </div>
+
+        <p>What makes our love special isn't just the grand moments or milestone celebrations. It's in the quiet
+            mornings when I wake up to your smile. It's in the way you know exactly what I need before I say a word.
+            It's in our shared laughter over inside jokes that no one else would understand.</p>
+
+        <div class="letter">
+            <p>Happiest Birthday ,My love</p>
+            <p>Happy Birthday to the one who holds my heart. On this special day, I just want to take a moment to remind
+                you how incredible you are. Every day with you feels like a gift, but today, I get to celebrate you and
+                all the ways you make my world brighter.</p>
+
+            <p>From the way you light up a room with your smile to the quiet moments we share that mean everything, you
+                continue to amaze me. I feel so lucky to be the one by your side, watching you grow, laugh, and just be
+                you. You make life so much better, and I can’t imagine my world without you in it.</p>
+
+            <p>Today is all about you ,your joy, your beauty, and everything that makes you the wonderful person I love
+                so much. I promise to always cherish you, support you, and choose you every single day. You deserve all
+                the happiness in the world, and I’m so grateful to be a part of your journey.</p>
+
+            <p>Here’s to celebrating you today and always. Happy Birthday, my love. I can’t wait to create even more
+                beautiful memories with you hehe will go to pondicherry together.</p>
+
+            <p class="signature">Forever yours, <br>Me</p>
+        </div>
+
+        <p>They say that when you find someone who truly matters to you, you start to imagine more of your life with
+            them. I’ve felt that way about you for a while now, and every day with you just makes me more sure. You
+            bring so much joy, comfort, and meaning into my life. You're my favorite person to talk to, to laugh with,
+            and to miss when we’re apart.</p>
+
+        <p>Forever doesn't seem long enough to love you, but I am grateful for every moment we get to share. Thank you
+            for choosing me, for loving me, and for building this beautiful life with me. I am, and will always be,
+            forever yours.</p>
+
+        <button class="heart-button" onclick="window.close()">Back to Our Story</button>
+    </div>
+</body>
+<script>
+    // Theme toggle functionality
+    document.addEventListener('DOMContentLoaded', function () {
+        // Create the theme toggle button
+        const themeToggle = document.createElement('button');
+        themeToggle.className = 'theme-toggle';
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>'; // Assuming you're using Font Awesome
+        document.body.appendChild(themeToggle);
+
+        // Check for saved theme preference or default to dark
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-theme');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+
+        // Toggle theme when button is clicked
+        themeToggle.addEventListener('click', function () {
+            document.body.classList.toggle('light-theme');
+
+            // Save theme preference
+            const currentTheme = document.body.classList.contains('light-theme') ? 'light' : 'dark';
+            localStorage.setItem('theme', currentTheme);
+
+            // Update button icon
+            if (currentTheme === 'light') {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        });
+    });
+</script>
+
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <title>First Date</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        :root {
+            /* Dark Theme Colors */
+            --dark-bg-gradient: linear-gradient(135deg, #121212, #1a1a1a, #121212);
+            --dark-container-bg: rgba(30, 30, 30, 0.9);
+            --dark-text: #f1f3f5;
+            --dark-secondary-text: #e0e0e0;
+            --dark-accent: #d81b60;
+            --dark-accent-hover: #e91e63;
+            --dark-shadow: rgba(0, 0, 0, 0.2);
+            --dark-accent-shadow: rgba(216, 27, 96, 0.3);
+
+            /* Light Theme Colors */
+            --light-bg-gradient: linear-gradient(135deg, #ffccd5, #ffb6b9, #ffe3e3);
+            --light-container-bg: rgba(255, 255, 255, 0.8);
+            --light-text: #660000;
+            --light-secondary-text: #cc3366;
+            --light-accent: #ff4d6d;
+            --light-accent-hover: #ff6f85;
+            --light-shadow: rgba(255, 77, 109, 0.2);
+            --light-accent-shadow: rgba(255, 77, 109, 0.3);
+
+            /* Default to dark theme */
+            --bg-gradient: var(--dark-bg-gradient);
+            --container-bg: var(--dark-container-bg);
+            --text: var(--dark-text);
+            --secondary-text: var(--dark-secondary-text);
+            --accent: var(--dark-accent);
+            --accent-hover: var(--dark-accent-hover);
+            --shadow: var(--dark-shadow);
+            --accent-shadow: var(--dark-accent-shadow);
+        }
+
+        body.light-theme {
+            --bg-gradient: var(--light-bg-gradient);
+            --container-bg: var(--light-container-bg);
+            --text: var(--light-text);
+            --secondary-text: var(--light-secondary-text);
+            --accent: var(--light-accent);
+            --accent-hover: var(--light-accent-hover);
+            --shadow: var(--light-shadow);
+            --accent-shadow: var(--light-accent-shadow);
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--container-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--accent-shadow);
+        }
+
+        h1 {
+            color: var(--accent);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .image-container {
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        p {
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-text);
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-3px);
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            background: var(--accent-hover);
+        }
+
+        .heart-button {
+            background-color: var(--card-bg);
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            padding: 12px 28px;
+            text-align: center;
+            display: inline-block;
+            font-size: 1rem;
+            border-radius: 3rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            margin: 20px auto;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .heart-button:hover {
+            background-color: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            box-shadow: 0 8px 20px var(--accent-shadow);
+        }
+
+        .heart-button i {
+            transition: transform 0.4s ease;
+            margin-right: 8px;
+        }
+
+        .heart-button:hover i {
+            transform: scale(1.2);
+            animation: heartbeat 1s infinite;
+        }
+
+        @keyframes heartbeat {
+            0% {
+                transform: scale(1);
+            }
+
+            25% {
+                transform: scale(1.2);
+            }
+
+            50% {
+                transform: scale(1);
+            }
+
+            75% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Our First Date</h1>
+
+        <div class="image-container">
+            <img src="photos/img22.heic" alt="First Date">
+        </div>
+
+        <p>It was during Navratri when I really noticed you—wearing those yellow traditionals, looking absolutely
+            radiant. I had seen you before, of course, back in school. I still remember your braids, your smile, and the
+            way you carried yourself. Even back then, there was something about you that stood out.
+        </p>
+
+        <p>I still remember riding my scooty all the way to Daman just to see you, even if it was only for two minutes
+            and in the middle of the rain. You were that special to me—worth every kilometer, every drop, every second.
+            As I said it was the best day of that year.
+        </p>
+
+        <p>We were texting all night non-stop, and I couldn’t get enough of it—I was so genuinely interested in you.
+            Every reply from you made me smile, and I found myself waiting for the next message like it was the best
+            part of my day. It wasn’t just small talk; it felt easy, real, and exciting. I didn’t even notice the time
+            passing because I was so caught up in getting to know you.</p>
+
+        <p>Later, watching you through Instagram stories, I honestly thought you were out of my league. You seemed so
+            effortless, confident, and beautiful in a way that felt unreachable to me. I never imagined that one day
+            we’d actually have a story of our own.</p>
+
+        <p>But somehow, life brought us together. And even now, I still have moments where I look at you and think, "How
+            did I get so lucky?" What started as distant admiration turned into something real something I get to hold
+            close every day.
+        </p>
+
+        <button class="heart-button" onclick="window.close()">Back to Our Story</button>
+
+    </div>
+</body>
+<script>
+    // Theme toggle functionality
+    document.addEventListener('DOMContentLoaded', function () {
+        // Create the theme toggle button
+        const themeToggle = document.createElement('button');
+        themeToggle.className = 'theme-toggle';
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>'; // Assuming you're using Font Awesome
+        document.body.appendChild(themeToggle);
+
+        // Check for saved theme preference or default to dark
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-theme');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+
+        // Toggle theme when button is clicked
+        themeToggle.addEventListener('click', function () {
+            document.body.classList.toggle('light-theme');
+
+            // Save theme preference
+            const currentTheme = document.body.classList.contains('light-theme') ? 'light' : 'dark';
+            localStorage.setItem('theme', currentTheme);
+
+            // Update button icon
+            if (currentTheme === 'light') {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        });
+    });
+</script>
+
+</html>
