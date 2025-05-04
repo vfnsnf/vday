@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Songs array
     const songs = [
+        { title: "Admirin' You", src:"music/AY.mp3"},
         { title: "Smack That", src: "music/ST.mp3" },
         { title: "Perfect", src: "music/Perfect.mp3" },
         { title: "Tera Ban Jaunga", src: "music/TBJ.mp3" },
